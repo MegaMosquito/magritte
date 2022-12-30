@@ -54,7 +54,7 @@ mmcblk0     179:0    0 29.7G  0 disk
 
 **5.** Now you can remove the MicroSD card since it is no longer needed
 
-**6.** Shrink and then compress the image. Shrinking removes all of the unused blocks from the disk image, very significantly reducing its size. This tool also configures the disk image so it will be automatically expanded to the full size of whatever MicroSD you burn it onto. For example, this 8GB image file will shrink to about 3GB, and then I will burn it onto a 32GB MicroSD and the file system will automatically resize on first boot so the entire 32GB is available. To shrink, I use "https://github.com/Drewsif/PiShrink". So clone this repo, and then use the shell script it contains to shrink the image. Here's an example command (image shrinking is very fast but if you use the`-z` argument to gzip it like I did below, then it will again take several minutes to compress the image file):
+**6.** Shrink and then compress the image. Shrinking removes all of the unused blocks from the disk image, very significantly reducing its size. This tool also configures the disk image so it will be automatically expanded to the full size of whatever MicroSD you burn it onto. For example, this 8GB image file will shrink to about 3GB, and then I will burn it onto a 32GB MicroSD and the file system will automatically resize on first boot so the entire 32GB is available. To shrink, I use [https://github.com/MegaMosquito/PiShrink](https://github.com/MegaMosquito/PiShrink). So clone this repo, and then use the shell script it contains to shrink the image. Here's an example command (image shrinking is very fast but if you use the`-z` argument to gzip it like I did below, then it will again take several minutes to compress the image file):
 
 ```
  $ sudo ./pishrink.sh -vzp image.img
@@ -98,7 +98,7 @@ mmcblk0     179:0    0 29.7G  0 disk
 
 This shows the boot disk of your machine (mounted at `/boot`) and the root of your Linux file system, mounted at `/`. It asl shows the USB disk has been given device address `/dev/sda` and the main partition of this disk (of size 1.4TB in the example above) is given the address `/dev/sda1`. This partition is not currently mounted as you can tell because nothing appears in the **MOUNTPOINT** column in the listing.
 
-If only a **disk** shows up under **TYPE**, and not a **prt* then you may need to format this disk before using it. There's a recipe for that below. Go ahead and format it then start over on this recipe.
+If only a **disk** shows up under **TYPE**, and not a **part* then you may need to format this disk before using it. There's a recipe for that below. Go ahead and format it then start over on this recipe.
 
 Now let's manually mount it.
 
@@ -110,7 +110,7 @@ Begin by creating a place in the `/` file system for the disk to be mounted. In 
  $ mkdir /media/pi/my-disk
 ```
 
-Note that a mount point directory like this must exist before you use the `mount` command to mount your disk **partition** there. I emphasized partition there because you aren't mounting the disk, but instead you are mounting the partition. Parttitions appear in the `lsblk` output with **TYPE** "**part**". In the above example, the disk is `/dev/sda` but the partition is `/dev/sda1`. Let's mount the partition now:
+Note that a mount point directory like this must exist before you use the `mount` command to mount your disk **partition** there. I emphasized partition there because you aren't mounting the disk, but instead you are mounting the partition. Partitions appear in the `lsblk` output with **TYPE** "**part**". In the above example, the disk is `/dev/sda` but the partition is `/dev/sda1`. Let's mount the partition now:
 
 ```
  $ mount /dev/sda1 /media/pi/my-disk
@@ -118,9 +118,9 @@ Note that a mount point directory like this must exist before you use the `mount
 
 Verify that the mount has been completed, by running the `mount` command without any arguments to list all mounts. You could also run the `sudo lsblk` command again to see the mountpoint for the partition.
 
-Note that after the parition is mounted, its files are directories can be viewd in the file system using normal commands, or using the visual file browser on your Desktop. You can `cd` to the mount point, and `'ls`, etc.
+Note that after the partition is mounted, its files are directories can be viewed in the file system using normal commands, or using the visual file browser on your Desktop. You can `cd` to the mount point, and `'ls`, etc.
 
-Now let's make this mount permanent. We will need some more information about the parition first.
+Now let's make this mount permanent. We will need some more information about the partition first.
 
 **4.** Get the partition's details
 
@@ -138,7 +138,7 @@ Note that in my experience, Linux does not handle non-Linux file systems well. S
 
 **5.**  Permanently mount the disk
 
-**NOTE**: To make the mount permanent, you must edit the system `/etc/fstab` file. This is a key component of your Linux system. If you make an error in editing this file you may render your system unbootable. It is strongly recommended that you make a complete system backup before you begin, in case you need to revert to that backup. There is a recipe above that will enable you to create a snapshow of an entire disk in an "**.img**" file. You could do that and save the file somewhere else (off this machine) before you begin. It is also wise to make a copy of this file before you make changes. Then you most likely can rescue an unbootable system by mounting it on another Linux host and restoring this file from your coriginal copy.
+**NOTE**: To make the mount permanent, you must edit the system `/etc/fstab` file. This is a key component of your Linux system. If you make an error in editing this file you may render your system unbootable. It is strongly recommended that you make a complete system backup before you begin, in case you need to revert to that backup. There is a recipe above that will enable you to create a snapshot of an entire disk in an "**.img**" file. You could do that and save the file somewhere else (off this machine) before you begin. It is also wise to make a copy of this file before you make changes. Then you most likely can rescue an unbootable system by mounting it on another Linux host and restoring this file from your original copy.
 
 To begin, take a look at your `/etc/fstab` file, and create a copy of the original. E.g.:
 
@@ -159,7 +159,7 @@ Add a line with this form:
     <UUID> <MOUNTPOINT> <TYPE> defaults 0 2
 ```
 
-You can Google for more details on `/etc/fstab` but the safest approach is to always add ` defaults 0 2`. The last number should always be 2. The second to last should always be 0. `defaults` is the safest default value for the thrid to last field. Fields are separated by one or more tabs or spaces.
+You can Google for more details on `/etc/fstab` but the safest approach is to always add ` defaults 0 2`. The last number should always be 2. The second to last should always be 0. `defaults` is the safest default value for the third to last field. Fields are separated by one or more tabs or spaces.
 
 For example, I modified the file above to mount a Linux disk by adding one line:
 
@@ -174,14 +174,14 @@ UUID=c40a7586-641e-48d6-b9fe-342fabcccbe5 /media/pi/PLEXDATA ext4 defaults 0 2
 :~ $ 
 ```
 
-After making the changes, unmount the disk manually, then see if it will re-mount using your changes to the permanent mounts. (the `mount -a` command tries to mount all of the permanent mounts that are not currently mounted). Oh, and please note that the command to unmount paritions in Linux is `umount` (not unmount, as one might expect).
+After making the changes, unmount the disk manually, then see if it will re-mount using your changes to the permanent mounts. (the `mount -a` command tries to mount all of the permanent mounts that are not currently mounted). Oh, and please note that the command to unmount partitions in Linux is `umount` (not unmount, as one might expect).
 
 ```
  $ umount /media/pi/my-disk
  $ mount -a
 ```
 
-Then check that it is remounted by running `mount` with no arguments or `sudo sblk`. If the mount shows, try exploring the files below the mount point. If this all looks good, then reboot the machine, and check again after rebooting.
+Then check that it is remounted by running `mount` with no arguments or `sudo lsblk`. If the mount point shows up in that output, try exploring the files below the mount point. If this all looks good, then reboot the machine, and check again after rebooting.
 
 ### How to format a disk for Linux use.
 
@@ -206,7 +206,7 @@ Make sure you know which disk you want to format, because formatting it will rem
 
 **3.**  Use a CLI command to unmount the disk if it is mounted (but leave it attached):
 
-Note that the command to unmount paritions in Linux is `umount` (not unmount, as one might expect).
+Note that the command to unmount partitions in Linux is `umount` (not unmount, as one might expect).
 
 ```
  $ umount /media/pi/PLEXDATA
@@ -226,6 +226,6 @@ The command to partition and format a disk in Linux is `mkfs`. You just need to 
 sudo mkfs -t ext4 /dev/sda1
 ```
 
-When the formatting completes you can mount the disk as described in another recioe above and then start using it.
+When the formatting completes you can mount the disk as described in another recipe above and then start using it.
 
 
