@@ -6,11 +6,11 @@ There really isn't any actual code here. Instead, this is just a set of how-to r
 
 Recipes included here:
 
-1. [How to create a ".img" file, and shrink it, and compress it.](https://github.com/MegaMosquito/magritte/edit/main/README.md#how-to-create-a-img-file-and-shrink-it-and-compress-it)
+1. [How to create a ".img" file, and shrink it, and compress it.](https://github.com/MegaMosquito/magritte/blob/main/README.md#how-to-create-a-img-file-and-shrink-it-and-compress-it)
 
-2. [How to permanently mount the file system from USB media.](https://github.com/MegaMosquito/magritte/edit/main/README.md#how-to-permanently-mount-the-file-system-from-usb-media)
+2. [How to permanently mount the file system from USB media.](https://github.com/MegaMosquito/magritte/blob/main/README.md#how-to-permanently-mount-the-file-system-from-usb-media)
 
-3. [How to format a disk for Linux use.](https://github.com/MegaMosquito/magritte/edit/main/README.md#how-to-format-a-disk-for-linux-use)
+3. [How to format a disk for Linux use.](https://github.com/MegaMosquito/magritte/blob/main/README.md#how-to-format-a-disk-for-linux-use)
 
 ## The Recipes
 
