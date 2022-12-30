@@ -6,15 +6,15 @@ There really isn't any actual code here. Instead, this is just a set of how-to r
 
 Recipes included here:
 
-1. [How to create a ".img" file, and shrink it, and compress it.](https://github.com/MegaMosquito/magritte/blob/main/README.md#image)
+1. [How to create a ".img" file, and shrink it, and compress it.](https://github.com/MegaMosquito/magritte/edit/main/README.md#how-to-create-a-img-file-and-shrink-it-and-compress-it)
 
-2. [How to permanently mount the file system from USB media.](https://github.com/MegaMosquito/magritte/blob/main/README.md#mount)
+2. [How to permanently mount the file system from USB media.](https://github.com/MegaMosquito/magritte/edit/main/README.md#how-to-permanently-mount-the-file-system-from-usb-media)
 
-3. [How to format a disk for Linux use.](https://github.com/MegaMosquito/magritte/blob/main/README.md#format)
+3. [How to format a disk for Linux use.](https://github.com/MegaMosquito/magritte/edit/main/README.md#how-to-format-a-disk-for-linux-use)
 
 ## The Recipes
 
-### <a name="#image"></a>How to create a ".img" file, and shrink it, and compress it.
+### How to create a ".img" file, and shrink it, and compress it.
 
  * Note: this technique uses tool uses my fork of [Drewsif/PiShrink](https://github.com/Drewsif/PiShrink). I forked it to keep a stable version under my control. You could use the original instead.
 
@@ -75,7 +75,7 @@ The "shrunken" image (before compression) was about 3GB:
 ```
 
 
-### <a name="#mount"></a>How to permanently mount the file system from USB media.
+### How to permanently mount the file system from USB media.
 
 Sometimes I want to mount a large disk drive onto one of my small Linux computers. For example, when I create a Network Addressable Storage (NAS) service or a Media Server (like Plex). I usually use a Linux **Desktop** distribution in these cases, and they will automatically mount the drive when you do that. However, they create temporary mounts. The recipe here will show you how to mount a disk if it is not mounted, and then it will show you how to make a disk mount permanent, such that Linux will mount it each time the machine boots.
 
@@ -183,7 +183,7 @@ After making the changes, unmount the disk manually, then see if it will re-moun
 
 Then check that it is remounted by running `mount` with no arguments or `sudo sblk`. If the mount shows, try exploring the files below the mount point. If this all looks good, then reboot the machine, and check again after rebooting.
 
-### <a name="#format"></a>How to format a disk for Linux use.
+### How to format a disk for Linux use.
 
 Formatting a disk for Linux, from the Linux CLI is relatively easy with this recipe:
 
