@@ -113,7 +113,7 @@ Begin by creating a place in the `/` file system for the disk to be mounted. In 
 Note that a mount point directory like this must exist before you use the `mount` command to mount your disk **partition** there. I emphasized partition there because you aren't mounting the disk, but instead you are mounting the partition. Partitions appear in the `lsblk` output with **TYPE** "**part**". In the above example, the disk is `/dev/sda` but the partition is `/dev/sda1`. Let's mount the partition now:
 
 ```
- $ mount /dev/sda1 /media/pi/my-disk
+ $ sudo mount /dev/sda1 /media/pi/my-disk
 ```
 
 Verify that the mount has been completed, by running the `mount` command without any arguments to list all mounts. You could also run the `sudo lsblk` command again to see the mountpoint for the partition.
@@ -177,8 +177,8 @@ UUID=c40a7586-641e-48d6-b9fe-342fabcccbe5 /media/pi/PLEXDATA ext4 defaults 0 2
 After making the changes, unmount the disk manually, then see if it will re-mount using your changes to the permanent mounts. (the `mount -a` command tries to mount all of the permanent mounts that are not currently mounted). Oh, and please note that the command to unmount partitions in Linux is `umount` (not unmount, as one might expect).
 
 ```
- $ umount /media/pi/my-disk
- $ mount -a
+ $ sudo umount /media/pi/my-disk
+ $ sudo mount -a
 ```
 
 Then check that it is remounted by running `mount` with no arguments or `sudo lsblk`. If the mount point shows up in that output, try exploring the files below the mount point. If this all looks good, then reboot the machine, and check again after rebooting.
@@ -209,7 +209,7 @@ Make sure you know which disk you want to format, because formatting it will rem
 Note that the command to unmount partitions in Linux is `umount` (not unmount, as one might expect).
 
 ```
- $ umount /media/pi/PLEXDATA
+ $ sudo umount /media/pi/PLEXDATA
 ```
 
 Then run the `sudo lsblk` command again to verify the **MOUNTPOINT** has been removed.
